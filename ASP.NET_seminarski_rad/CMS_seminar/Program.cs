@@ -1,4 +1,7 @@
 using CMS_seminar.Data;
+using CMS_seminar.Interfaces;
+using CMS_seminar.Models;
+using CMS_seminar.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +16,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddScoped<IGenericRepository<Category>, CategoryRepository>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
