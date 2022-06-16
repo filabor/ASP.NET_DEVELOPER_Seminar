@@ -18,6 +18,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IGenericRepository<Category>, CategoryRepository>();
+builder.Services.AddScoped<IGenericRepository<Product>, ProductRepository>();
+builder.Services.AddScoped<IGenericRepository<ProductCategory>, ProductCategoryRepository>();
 
 builder.Services.AddControllersWithViews();
 
