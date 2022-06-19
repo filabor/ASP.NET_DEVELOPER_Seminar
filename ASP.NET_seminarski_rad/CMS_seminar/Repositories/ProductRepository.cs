@@ -34,13 +34,17 @@ namespace CMS_seminar.Repositories
         {
             _context.Products.Update(product);
             _context.SaveChanges();
+
+            List<ProductCategory> categories = _context.ProductCategories.Where(s => s.ProductId == product.Id).ToList();
+
+            _context.ProductCategories.RemoveRange(categories);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
             var product_to_remove = _context.Products.SingleOrDefault(p => p.Id == id);
-            _context.Remove(product_to_remove);
-
+            _context.Products.Remove(product_to_remove);
             _context.SaveChanges();
         }
 
