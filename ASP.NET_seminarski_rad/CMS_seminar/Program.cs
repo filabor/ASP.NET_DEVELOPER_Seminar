@@ -2,6 +2,7 @@ using CMS_seminar.Data;
 using CMS_seminar.Interfaces;
 using CMS_seminar.Models;
 using CMS_seminar.Repositories;
+using CMS_seminar.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddScoped<IGenericRepository<Category>, CategoryRepository>();
 builder.Services.AddScoped<IGenericRepository<Product>, ProductRepository>();
 builder.Services.AddScoped<IGenericRepository<ProductCategory>, ProductCategoryRepository>();
+builder.Services.AddScoped<ProductService>();
 
 builder.Services.AddControllersWithViews();
 

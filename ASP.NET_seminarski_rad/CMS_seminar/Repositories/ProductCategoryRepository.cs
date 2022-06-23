@@ -1,6 +1,7 @@
 ﻿using CMS_seminar.Data;
 using CMS_seminar.Interfaces;
 using CMS_seminar.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CMS_seminar.Repositories
 {
@@ -16,7 +17,7 @@ namespace CMS_seminar.Repositories
 
         public IEnumerable<ProductCategory> GetAll()
         {
-            return _context.ProductCategories.ToList();
+            return _context.ProductCategories.Include("Category").ToList();
         }
 
         public ProductCategory GetById(int id)

@@ -1,0 +1,28 @@
+﻿@model List<CMS_seminar.Models.Category>
+@inject CMS_seminar.Data.ApplicationDbContext application_db_context
+
+
+@foreach (var category_item in application_db_context.Categories)
+{
+    <div class="form-check">
+        @if (Model != null && Model.Count > 0)
+        {
+            @if (Model.Find(cat => cat.Id == category_item.Id) != null)
+            {
+                <input class="form-check-input" type="checkbox" name="category_id" value="@category_item.Id" checked>
+            }
+            else
+            {
+                <input class="form-check-input" type="checkbox" name="category_id" value=@category_item.Id>
+            }
+        }
+        else
+        {
+            <input class="form-check-input" type="checkbox" name="category_id" value="@category_item.Id">
+        }
+
+        <label class="form-check-label" for="flexCheckDefault">
+            @category_item.Title
+        </label>
+    </div>
+}
