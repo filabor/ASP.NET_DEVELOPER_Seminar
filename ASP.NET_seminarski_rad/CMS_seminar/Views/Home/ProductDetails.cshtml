@@ -1,0 +1,30 @@
+﻿@model CMS_seminar.Models.Product
+
+<h4>Product details</h4>
+
+<hr />
+
+<div class="card mb-3 mx-auto" style="width: 36rem;">
+    <img src="~/images/@Model.ImageName" class="card-img-top">
+    <div class="card-body">
+        <h3 class="card-title">@Model.Title</h3>
+        <h5 class="card-text">@Model.Description</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Price kn</td>
+                    <td>@Model.Quantity</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<a asp-action="Product">Back to List</a>

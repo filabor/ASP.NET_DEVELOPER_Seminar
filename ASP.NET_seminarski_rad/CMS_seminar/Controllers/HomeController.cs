@@ -1,4 +1,5 @@
 ﻿using CMS_seminar.Models;
+using CMS_seminar.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,10 +8,12 @@ namespace CMS_seminar.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ProductService _productService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ProductService productService)
         {
             _logger = logger;
+            _productService = productService;
         }
 
         public IActionResult Index()
@@ -25,7 +28,28 @@ namespace CMS_seminar.Controllers
 
         public IActionResult Product()
         {
-            return View();
+            var products = _productService.GetAllProducts();
+            return View(products);
+        }
+
+        public IActionResult ProductDetails(int id)
+        {
+            if (id == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            var product = _productService.GetProductById(id);
+
+            if (product == null)
+            {
+                return RedirectToAction("Index", new { msg = "Product does not exist!" });
+            }
+
+            var categories = _productService.GetProductCategories(id);
+
+            ViewBag.ProductCategories = categories;
+
+            return View(product);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
