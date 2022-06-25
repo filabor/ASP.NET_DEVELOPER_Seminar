@@ -1,8 +1,8 @@
 ﻿@model List<CMS_seminar.Models.Category>
-@inject CMS_seminar.Data.ApplicationDbContext application_db_context
+@inject CMS_seminar.Interfaces.IGenericRepository<Category> category_repository
 
 
-@foreach (var category_item in application_db_context.Categories)
+@foreach (var category_item in category_repository.GetAll())
 {
     <div class="form-check">
         @if (Model != null && Model.Count > 0)
