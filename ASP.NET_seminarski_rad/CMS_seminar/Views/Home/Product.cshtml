@@ -4,6 +4,27 @@
 <hr />
 
 
+<div class="row mb-5">
+    <div class="col-6">
+        <form method="GET" asp-area="" asp-controller="home" asp-action="product">
+            <div class="input-group mb-3">
+                <select class="form-select" id="floatingSelect" name="category_id">
+                    <option selected value="">All categories</option>
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.Id">@category.Title</option>
+                    }
+                </select>
+
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Filter products by category</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <div class="row">
     @foreach (var item in Model)
     {
