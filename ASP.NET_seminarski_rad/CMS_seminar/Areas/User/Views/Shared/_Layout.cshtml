@@ -1,5 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using CMS_seminar.Data
+﻿@using CMS_seminar.Data
+@using Microsoft.AspNetCore.Identity
+
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
@@ -27,21 +28,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="User" asp-controller="Profile" asp-action="GetDetails">User profile</a>
-                            </li>
-                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="User" asp-controller="Profile" asp-action="GetDetails">User profile</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Product">Products</a>
                         </li>
-                        <li class="nav-item">
-                            <partial name="_AdminMenuPartial" />
-                        </li>
+                        @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+                        {
+                            <li class="nav-item">
+                                <partial name="_AdminMenuPartial" />
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

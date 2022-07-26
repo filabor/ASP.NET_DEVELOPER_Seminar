@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using CMS_seminar.ViewModels;
 
 namespace CMS_seminar.Data
 {
@@ -28,5 +29,6 @@ namespace CMS_seminar.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<CMS_seminar.ViewModels.UserViewModel>? UserViewModel { get; set; }
     }
 }

@@ -24,6 +24,8 @@ builder.Services.AddScoped<IGenericRepository<Category>, CategoryRepository>();
 builder.Services.AddScoped<IGenericRepository<Product>, ProductRepository>();
 builder.Services.AddScoped<IGenericRepository<ProductCategory>, ProductCategoryRepository>();
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddControllersWithViews();
 
@@ -72,6 +74,11 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
             name: "Admin",
+            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+          );
+
+app.MapControllerRoute(
+            name: "User",
             pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
           );
 
