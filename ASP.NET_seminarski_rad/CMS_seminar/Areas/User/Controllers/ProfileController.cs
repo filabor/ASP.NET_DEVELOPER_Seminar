@@ -35,8 +35,6 @@ namespace CMS_seminar.Areas.User.Controllers
 
             var user = _userService.GetUserById(user_id);
 
-            ViewBag.Roles = _userService.GetAllRoles();
-
             return View(user);
         }
 
@@ -47,7 +45,7 @@ namespace CMS_seminar.Areas.User.Controllers
         {
             try
             {
-                _userService.UpdateUser(user);
+                _userService.UpdateUserProfile(user);
 
                 return RedirectToAction(nameof(GetDetails));
             }

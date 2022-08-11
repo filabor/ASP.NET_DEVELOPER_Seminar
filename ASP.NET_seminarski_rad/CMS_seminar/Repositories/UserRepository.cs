@@ -60,6 +60,12 @@ namespace CMS_seminar.Repositories
             _context.SaveChanges();
         }
 
+        public void UpdateProfile(ApplicationUser user)
+        {
+            _context.Update(user);
+            _context.SaveChanges();
+        }
+
         public void Delete(string id)
         {
             var user_to_remove = _context.Users.SingleOrDefault(u => u.Id == id);

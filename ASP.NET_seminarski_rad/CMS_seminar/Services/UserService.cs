@@ -93,16 +93,25 @@ namespace CMS_seminar.Services
             _userRepository.Update(user_to_update, user.Role);
         }
 
+        public void UpdateUserProfile(UserViewModel user)
+        {
+            ApplicationUser user_to_update = _userRepository.GetById(user.Id);
+
+            user_to_update.FirstName = user.FirstName;
+            user_to_update.LastName = user.LastName;
+            user_to_update.Address = user.Address;
+            user_to_update.Email = user.Email;
+            user_to_update.UserName = user.Email;
+            user_to_update.NormalizedUserName = user.Email.ToUpper();
+
+            _userRepository.UpdateProfile(user_to_update);
+        }
+
         public string GetHashedPassword(string password)
         {
             var hasher = new PasswordHasher<ApplicationUser>();
 
             return hasher.HashPassword(null, password);
-        }
-
-        public void UpdateUser(ApplicationUser user, string role_name)
-        {
-            _userRepository.Update(user, role_name);
         }
 
         public void DeleteUser(string id)

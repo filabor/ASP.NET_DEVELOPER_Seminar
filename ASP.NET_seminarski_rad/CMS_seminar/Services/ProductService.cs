@@ -28,6 +28,11 @@ namespace CMS_seminar.Services
             return _productRepository.GetById(id);
         }
 
+        public IEnumerable<Product> GetRandomProducts()
+        {
+            return _productRepository.GetAll().OrderBy(rp => Guid.NewGuid()).Take(10).ToList();
+        }
+
         public void CreateNewProduct(Product new_product, int[] category_ids, IFormFile Image)
         {
             if (Image != null)

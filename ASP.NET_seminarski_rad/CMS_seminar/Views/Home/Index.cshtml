@@ -4,5 +4,31 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Explore our products</p>
+</div>
+
+<br />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+
+                    @if (item.ImageName != null)
+                    {
+                        <p>
+                            <img src="~/images/@item.ImageName" style="width:100%; height=250px;">
+                        </p>
+                    }
+
+                    <h5 class="card-title">@item.Title</h5>
+                    <hr>
+
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Home" asp-action="ProductDetails" asp-route-id="@item.Id" role="button">See details</a>
+                </div>
+            </div>
+        </div>
+    }
 </div>

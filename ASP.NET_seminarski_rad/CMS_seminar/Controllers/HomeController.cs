@@ -23,7 +23,9 @@ namespace CMS_seminar.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var random_products = _productService.GetRandomProducts().ToList();
+
+            return View(random_products);
         }
 
         public IActionResult Privacy()
