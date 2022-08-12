@@ -35,6 +35,24 @@ namespace CMS_seminar.Services
 
         public void CreateNewProduct(Product new_product, int[] category_ids, IFormFile Image)
         {
+            UploadImage(new_product, Image);
+
+            _productRepository.CreateNew(new_product);
+
+            int product_id = new_product.Id;
+
+            foreach (var category_id in category_ids)
+            {
+                ProductCategory ProductCategory = new ProductCategory();
+                ProductCategory.ProductId = product_id;
+                ProductCategory.CategoryId = category_id;
+
+                _productCategoryRepository.CreateNew(ProductCategory);
+            }
+        }
+
+        private static void UploadImage(Product new_product, IFormFile Image)
+        {
             if (Image != null)
             {
                 var image_name = DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + "-" + Image.FileName.ToLower();
@@ -48,24 +66,12 @@ namespace CMS_seminar.Services
 
                 new_product.ImageName = image_name;
             }
-            
-
-            _productRepository.CreateNew(new_product);
-
-            int product_id = new_product.Id;
-
-            foreach(var category_id in category_ids)
-            {
-                ProductCategory ProductCategory = new ProductCategory();
-                ProductCategory.ProductId = product_id;
-                ProductCategory.CategoryId = category_id;
-
-                _productCategoryRepository.CreateNew(ProductCategory);
-            }
         }
 
-        public void UpdateProduct(Product product, int[] category_ids)
+        public void UpdateProduct(Product product, int[] category_ids, IFormFile Image)
         {
+            UploadImage(product, Image);
+
             _productRepository.Update(product);
 
             

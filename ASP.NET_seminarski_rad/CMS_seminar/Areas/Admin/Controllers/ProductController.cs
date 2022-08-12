@@ -104,11 +104,11 @@ namespace CMS_seminar.Areas.Admin.Controllers
         // POST: ProductController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product product, int[] category_id)
+        public ActionResult Edit(Product product, int[] category_id, IFormFile Image)
         {
             try
             {
-                _productService.UpdateProduct(product, category_id);
+                _productService.UpdateProduct(product, category_id, Image);
 
                 return RedirectToAction(nameof(Index));
             }
