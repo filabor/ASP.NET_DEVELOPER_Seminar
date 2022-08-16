@@ -90,7 +90,7 @@ namespace CMS_seminar.Services
             user_to_update.UserName = user.Email;
             user_to_update.NormalizedUserName = user.Email.ToUpper();
 
-            _userRepository.Update(user_to_update, user.Role);
+            _userRepository.UpdateUserAndRoles(user_to_update, user.Role);
         }
 
         public void UpdateUserProfile(UserViewModel user)
@@ -104,7 +104,7 @@ namespace CMS_seminar.Services
             user_to_update.UserName = user.Email;
             user_to_update.NormalizedUserName = user.Email.ToUpper();
 
-            _userRepository.UpdateProfile(user_to_update);
+            _userRepository.UpdateUser(user_to_update);
         }
 
         public string GetHashedPassword(string password)

@@ -30,17 +30,22 @@ namespace CMS_seminar.Repositories
             _context.Users.Add(new_user);
             _context.SaveChanges();
 
+            CreateUserRole(new_user.Id, role_name);
+        }
+
+        public void CreateUserRole(string new_user_id, string role_name)
+        {
             IdentityRole role = GetRoleByName(role_name);
 
             IdentityUserRole<string> identityUserRole = new IdentityUserRole<string>();
             identityUserRole.RoleId = role.Id;
-            identityUserRole.UserId = new_user.Id;
+            identityUserRole.UserId = new_user_id;
 
             _context.UserRoles.Add(identityUserRole);
             _context.SaveChanges();
         }
 
-        public void Update(ApplicationUser user, string role_name)
+        public void UpdateUserAndRoles(ApplicationUser user, string role_name)
         {
             _context.Users.Update(user);
             _context.SaveChanges();
@@ -50,17 +55,10 @@ namespace CMS_seminar.Repositories
             _context.UserRoles.Remove(user_role);
             _context.SaveChanges();
 
-            IdentityRole role = GetRoleByName(role_name);
-
-            IdentityUserRole<string> identityUserRole = new IdentityUserRole<string>();
-            identityUserRole.RoleId = role.Id;
-            identityUserRole.UserId = user.Id;
-
-            _context.UserRoles.Add(identityUserRole);
-            _context.SaveChanges();
+            CreateUserRole(user.Id, role_name);
         }
 
-        public void UpdateProfile(ApplicationUser user)
+        public void UpdateUser(ApplicationUser user)
         {
             _context.Update(user);
             _context.SaveChanges();
