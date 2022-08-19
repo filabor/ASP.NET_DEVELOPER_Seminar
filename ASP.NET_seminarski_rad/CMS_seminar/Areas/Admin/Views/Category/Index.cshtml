@@ -4,6 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
+@if(ViewBag.CategoryErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.CategoryErrorMessage
+    </div>
+}
+
 <h1>Index</h1>
 
 <p>

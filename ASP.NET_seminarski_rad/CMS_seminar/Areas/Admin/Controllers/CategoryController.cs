@@ -21,9 +21,11 @@ namespace CMS_seminar.Areas.Admin.Controllers
 
 
         // GET: CategoryController
-        public ActionResult Index()
+        public ActionResult Index(string? msg)
         {
             var get_all_categories = _categoryRepository.GetAll();
+
+            ViewBag.CategoryErrorMessage = msg;
 
             return View(get_all_categories);
         }
@@ -67,11 +69,16 @@ namespace CMS_seminar.Areas.Admin.Controllers
         // GET: CategoryController/Edit/5
         public ActionResult Edit(int id)
         {
-            var category = _categoryRepository.GetById(id);
-
             if(id == 0)
             {
                 return RedirectToAction("Index");
+            }
+
+            var category = _categoryRepository.GetById(id);
+
+            if (category == null)
+            {
+                return RedirectToAction("Index", new { msg = "Category does not exist!" });
             }
 
             return View(category);
