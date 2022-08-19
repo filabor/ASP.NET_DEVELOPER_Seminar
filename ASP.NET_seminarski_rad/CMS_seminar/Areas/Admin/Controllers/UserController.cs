@@ -67,6 +67,11 @@ namespace CMS_seminar.Areas.Admin.Controllers
         // GET: UserController/Edit/5
         public ActionResult Edit(string id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
             var user = _userService.GetUserById(id);
 
             ViewBag.Roles = _userService.GetAllRoles();
