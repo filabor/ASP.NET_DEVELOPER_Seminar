@@ -13,6 +13,7 @@
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImageName" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -36,7 +37,7 @@
 
              <div class="form-group mt-2 mb-2">
                 <label>Current image</label>
-                <img src="~/images/@Model.ImageName" class="img-thumbnail">
+                <img src ="~/images/@Model.ImageName" class="img-thumbnail">
             </div>
 
             <div class="form-group mt-2 mb-2">

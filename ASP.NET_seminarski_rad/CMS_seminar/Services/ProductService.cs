@@ -35,7 +35,7 @@ namespace CMS_seminar.Services
 
         public void CreateNewProduct(Product new_product, int[] category_ids, IFormFile Image)
         {
-            UploadImage(new_product, Image);
+            new_product.ImageName =  UploadImage(Image);
 
             _productRepository.CreateNew(new_product);
 
@@ -51,7 +51,7 @@ namespace CMS_seminar.Services
             }
         }
 
-        private static void UploadImage(Product new_product, IFormFile Image)
+        private static string UploadImage(IFormFile Image)
         {
             if (Image != null)
             {
@@ -64,14 +64,19 @@ namespace CMS_seminar.Services
                     Image.CopyTo(stream);
                 }
 
-                new_product.ImageName = image_name;
+                return image_name;
             }
+
+            return string.Empty;
         }
 
         public void UpdateProduct(Product product, int[] category_ids, IFormFile Image)
         {
-            UploadImage(product, Image);
-
+            if (Image != null)
+            {
+                product.ImageName = UploadImage(Image);
+            }
+            
             _productRepository.Update(product);
 
             
