@@ -35,9 +35,12 @@ namespace CMS_seminar.Areas.Admin.Controllers
         }
 
         // GET: UserController/Create
-        public ActionResult Create()
+        public ActionResult Create(string? error_message)
         {
             ViewBag.Roles = _userService.GetAllRoles();
+
+            ViewBag.PasswordErrorMessage = error_message;
+
             return View();
         }
 
@@ -50,7 +53,6 @@ namespace CMS_seminar.Areas.Admin.Controllers
             {
                 if(user_view_model.Password != confirmedPassword)
                 {
-                    // Dodati error u viewu
                     return RedirectToAction("Create", new { error_message = "Please, enter the same passsword value!" });
                 }
                 
