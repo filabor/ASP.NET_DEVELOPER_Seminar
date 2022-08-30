@@ -32,9 +32,11 @@
  #### Installation
  - Clone this repository `https://github.com/filabor/Asp.Net_Developer_Seminar.git` or download ZIP file
  - Open it with Visual Studio
- - Run migrations in database with Package Manager Console
+ - Create new database in relational database management system you are using
+ - Change connection string in file `appsettings.json` to match database you have created
+ - Run migrations with Package Manager Console using command:
 
-   `PM> Update-Database`
+   `Update-Database`
  - Start the project
 
  ## Features
