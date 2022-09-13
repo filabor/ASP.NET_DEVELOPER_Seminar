@@ -1,0 +1,29 @@
+﻿@model List<Product>
+
+<h3>Product list:</h3>
+<h4>@ViewBag.ProductCategory.Title</h4>
+<hr />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+
+                    @if (item.ImageName != null)
+                    {
+                        <p>
+                            <img src="~/images/@item.ImageName" style="width:100%; height=250px;">
+                        </p>
+                    }
+
+                    <h5 class="card-title">@item.Title</h5>
+                    <hr>
+
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Home" asp-action="ProductDetails" asp-route-id="@item.Id" role="button">See details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

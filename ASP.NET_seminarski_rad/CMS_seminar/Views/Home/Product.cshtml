@@ -8,7 +8,7 @@
     <div class="col-6">
         <form method="GET" asp-area="" asp-controller="home" asp-action="product">
             <div class="input-group mb-3">
-                <select class="form-select" id="floatingSelect" name="category_id">
+                <select class="form-select" id="floatingSelect" name="id">
                     <option selected value="">All categories</option>
                     @foreach (var category in ViewBag.Categories)
                     {

@@ -1,0 +1,16 @@
+﻿@using CMS_seminar.Interfaces
+@inject IGenericRepository<Category> _categoryRepo
+
+<div class="dropdown">
+    <form method="GET">
+        <a class="btn nav-link text-dark dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+            Categories
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" name="id">
+            @foreach (var category in _categoryRepo.GetAll())
+            {
+                <li><button class="dropdown-item" type="submit" asp-area="" asp-controller="Home" asp-action="ProductsByCategory" asp-route-id="@category.Id">@category.Title</button></li>
+            }
+        </ul>
+    </form>
+</div>

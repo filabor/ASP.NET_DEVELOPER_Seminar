@@ -33,15 +33,15 @@ namespace CMS_seminar.Controllers
             return View();
         }
 
-        public IActionResult Product(int? category_id)
+        public IActionResult Product(int? id)
         {
             var products = new List<Product>();
 
-            if (category_id != null)
+            if (id != null)
             {
                 products = _productService.GetAllProducts()
                     .Where(p => _productCategoryRepository.GetAll()
-                    .Where(pc => pc.CategoryId == category_id)
+                    .Where(pc => pc.CategoryId == id)
                     .Select(pc => pc.ProductId).ToList().Contains(p.Id)).ToList();
             }
             else
@@ -52,6 +52,23 @@ namespace CMS_seminar.Controllers
             ViewBag.Categories = _categoryRepositoy.GetAll();
 
             return View(products);
+        }
+
+        public IActionResult ProductsByCategory(int? id)
+        {
+            var products_by_category = new List<Product>();
+
+            if (id != null)
+            {
+                products_by_category = _productService.GetAllProducts()
+                    .Where(p => _productCategoryRepository.GetAll()
+                    .Where(pc => pc.CategoryId == id)
+                    .Select(pc => pc.ProductId).ToList().Contains(p.Id)).ToList();
+
+                ViewBag.ProductCategory = _categoryRepositoy.GetById((int)id);
+            }
+
+            return View(products_by_category);
         }
 
         public IActionResult ProductDetails(int id)
